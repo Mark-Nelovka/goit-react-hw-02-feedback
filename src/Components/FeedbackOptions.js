@@ -1,28 +1,25 @@
 import React from "react";
 import PropTypes from "prop-types";
 import s from "./FeedBack.module.css";
-export default function FeedbackOptions({
-  onIncrementGood,
-  onIncrementNeutral,
-  onIncrementBad,
-}) {
+export default function FeedbackOptions({ onIncrement, buttons }) {
   return (
     <div>
-      <button className={s.btn} onClick={onIncrementGood} type="button">
-        Good
-      </button>
-      <button className={s.btn} onClick={onIncrementNeutral} type="button">
-        Neutral
-      </button>
-      <button className={s.btn} onClick={onIncrementBad} type="button">
-        Bad
-      </button>
+      {Object.keys(buttons).map((button) => {
+        return (
+          <button
+            key={button}
+            className={s.btn}
+            onClick={onIncrement}
+            type="button"
+          >
+            {button}
+          </button>
+        );
+      })}
     </div>
   );
 }
 
 FeedbackOptions.propTypes = {
-  onIncrementGood: PropTypes.func,
-  onIncrementNeutral: PropTypes.func,
-  onIncrementBad: PropTypes.func,
+  onIncrement: PropTypes.func,
 };

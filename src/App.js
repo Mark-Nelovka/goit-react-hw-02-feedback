@@ -12,22 +12,20 @@ class App extends Component {
     bad: 0,
   };
 
-  onIncrementGood = () => {
-    this.setState((prevState) => ({
-      good: prevState.good + 1,
-    }));
-  };
-
-  onIncrementNeutral = () => {
-    this.setState((prevState) => ({
-      neutral: prevState.neutral + 1,
-    }));
-  };
-
-  onIncrementBad = () => {
-    this.setState((prevState) => ({
-      bad: prevState.bad + 1,
-    }));
+  onIncrement = (e) => {
+    if (e.target.textContent === "good") {
+      this.setState((prevState) => ({
+        good: prevState.good + 1,
+      }));
+    } else if (e.target.textContent === "neutral") {
+      this.setState((prevState) => ({
+        neutral: prevState.neutral + 1,
+      }));
+    } else {
+      this.setState((prevState) => ({
+        bad: prevState.bad + 1,
+      }));
+    }
   };
 
   countTotalFeedback = ({ good, neutral, bad }) => {
@@ -50,9 +48,8 @@ class App extends Component {
       <div className="App">
         <SectionTitle title={"Please leave feedback"}>
           <FeedbackOptions
-            onIncrementGood={this.onIncrementGood}
-            onIncrementNeutral={this.onIncrementNeutral}
-            onIncrementBad={this.onIncrementBad}
+            onIncrement={this.onIncrement}
+            buttons={this.state}
           />
           {good || neutral || bad ? (
             <div>
